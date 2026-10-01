@@ -1,0 +1,2 @@
+event_id,timestamp,stoppage_duration_seconds,operator_note,machine_state,previous_machine_state,next_machine_state
+EVT_001,2026-08-01 10:00:00,15.0,note 1,RUNNING,RUNNING,RUNNING

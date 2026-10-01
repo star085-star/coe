@@ -1,0 +1,1189 @@
+{
+  "n_events": 10498,
+  "n_pre": 6265,
+  "n_post": 4233,
+  "n_labeled_train": 3149,
+  "n_test": 7349,
+  "baseline": {
+    "accuracy": 0.5651,
+    "macro_f1": 0.5044
+  },
+  "prototype": {
+    "accuracy": 0.9373,
+    "macro_f1": 0.8985,
+    "abstain_rate": 0.0163,
+    "top2_accuracy": 0.9784
+  },
+  "per_cause": [
+    {
+      "cause": "MATERIAL_MISALIGNMENT",
+      "support": 1685,
+      "proto_precision": 0.964,
+      "proto_recall": 0.96,
+      "proto_f1": 0.962,
+      "base_f1": 0.557
+    },
+    {
+      "cause": "SENSOR_INTERRUPTION",
+      "support": 1310,
+      "proto_precision": 0.966,
+      "proto_recall": 0.963,
+      "proto_f1": 0.964,
+      "base_f1": 0.577
+    },
+    {
+      "cause": "OPERATOR_LOADING_DELAY",
+      "support": 1382,
+      "proto_precision": 0.942,
+      "proto_recall": 0.89,
+      "proto_f1": 0.915,
+      "base_f1": 0.513
+    },
+    {
+      "cause": "SAFETY_ZONE_INTERRUPTION",
+      "support": 1025,
+      "proto_precision": 0.953,
+      "proto_recall": 0.955,
+      "proto_f1": 0.954,
+      "base_f1": 0.675
+    },
+    {
+      "cause": "ROBOT_RECOVERY",
+      "support": 946,
+      "proto_precision": 0.943,
+      "proto_recall": 0.959,
+      "proto_f1": 0.951,
+      "base_f1": 0.667
+    },
+    {
+      "cause": "TOOL_CHANGE",
+      "support": 404,
+      "proto_precision": 0.885,
+      "proto_recall": 0.918,
+      "proto_f1": 0.902,
+      "base_f1": 0.697
+    },
+    {
+      "cause": "QUALITY_INSPECTION_DELAY",
+      "support": 323,
+      "proto_precision": 0.84,
+      "proto_recall": 0.907,
+      "proto_f1": 0.872,
+      "base_f1": 0.486
+    },
+    {
+      "cause": "MATERIAL_SHORTAGE",
+      "support": 166,
+      "proto_precision": 0.812,
+      "proto_recall": 0.886,
+      "proto_f1": 0.847,
+      "base_f1": 0.286
+    },
+    {
+      "cause": "UNKNOWN",
+      "support": 108,
+      "proto_precision": 0.683,
+      "proto_recall": 0.759,
+      "proto_f1": 0.719,
+      "base_f1": 0.081
+    }
+  ],
+  "confusion_matrix": {
+    "labels": [
+      "MATERIAL_MISALIGNMENT",
+      "SENSOR_INTERRUPTION",
+      "OPERATOR_LOADING_DELAY",
+      "SAFETY_ZONE_INTERRUPTION",
+      "ROBOT_RECOVERY",
+      "TOOL_CHANGE",
+      "QUALITY_INSPECTION_DELAY",
+      "MATERIAL_SHORTAGE",
+      "UNKNOWN"
+    ],
+    "matrix": [
+      [
+        1617,
+        11,
+        21,
+        10,
+        12,
+        6,
+        3,
+        2,
+        3
+      ],
+      [
+        6,
+        1262,
+        4,
+        13,
+        8,
+        2,
+        5,
+        2,
+        8
+      ],
+      [
+        35,
+        12,
+        1230,
+        11,
+        18,
+        22,
+        28,
+        17,
+        9
+      ],
+      [
+        7,
+        3,
+        10,
+        979,
+        8,
+        3,
+        8,
+        1,
+        6
+      ],
+      [
+        2,
+        5,
+        8,
+        3,
+        907,
+        10,
+        5,
+        3,
+        3
+      ],
+      [
+        3,
+        1,
+        8,
+        4,
+        2,
+        371,
+        6,
+        3,
+        6
+      ],
+      [
+        5,
+        2,
+        12,
+        2,
+        1,
+        0,
+        293,
+        5,
+        3
+      ],
+      [
+        1,
+        1,
+        9,
+        0,
+        3,
+        5,
+        0,
+        147,
+        0
+      ],
+      [
+        2,
+        10,
+        4,
+        5,
+        3,
+        0,
+        1,
+        1,
+        82
+      ]
+    ]
+  },
+  "ablation_macro_f1": {
+    "structured_only": 0.7611,
+    "text_only": 0.7284,
+    "structured_plus_text": 0.8985
+  },
+  "label_efficiency": [
+    {
+      "labeled_fraction": 0.02,
+      "macro_f1_mean": 0.7865,
+      "macro_f1_std": 0.0084
+    },
+    {
+      "labeled_fraction": 0.05,
+      "macro_f1_mean": 0.8222,
+      "macro_f1_std": 0.0115
+    },
+    {
+      "labeled_fraction": 0.1,
+      "macro_f1_mean": 0.8577,
+      "macro_f1_std": 0.006
+    },
+    {
+      "labeled_fraction": 0.3,
+      "macro_f1_mean": 0.8909,
+      "macro_f1_std": 0.0064
+    },
+    {
+      "labeled_fraction": 0.5,
+      "macro_f1_mean": 0.9001,
+      "macro_f1_std": 0.0083
+    }
+  ],
+  "failure_states": [
+    {
+      "failure_state": "missing_notes",
+      "proto_macro_f1": 0.7459,
+      "proto_drop": 0.1526,
+      "base_macro_f1": 0.5044,
+      "base_drop": 0.0
+    },
+    {
+      "failure_state": "unknown_machine_states_30pct",
+      "proto_macro_f1": 0.8846,
+      "proto_drop": 0.0139,
+      "base_macro_f1": 0.4188,
+      "base_drop": 0.0856
+    },
+    {
+      "failure_state": "sensor_flag_dropout_60pct",
+      "proto_macro_f1": 0.8847,
+      "proto_drop": 0.0138,
+      "base_macro_f1": 0.5044,
+      "base_drop": 0.0
+    },
+    {
+      "failure_state": "garbled_notes_50pct",
+      "proto_macro_f1": 0.87,
+      "proto_drop": 0.0285,
+      "base_macro_f1": 0.5044,
+      "base_drop": 0.0
+    },
+    {
+      "failure_state": "duration_drift_x3",
+      "proto_macro_f1": 0.861,
+      "proto_drop": 0.0375,
+      "base_macro_f1": 0.5044,
+      "base_drop": 0.0
+    },
+    {
+      "failure_state": "notes_and_sensor_flags_both_lost",
+      "proto_macro_f1": 0.7228,
+      "proto_drop": 0.1757,
+      "base_macro_f1": 0.5044,
+      "base_drop": 0.0
+    }
+  ],
+  "unseen_cause": {
+    "held_out_cause": "MATERIAL_SHORTAGE",
+    "events": 166,
+    "abstained_or_unknown_rate": 0.0181,
+    "misattributed_to_recurring_cause_rate": 0.9819,
+    "note": "Unseen cause is routed to UNKNOWN/review instead of being confidently mislabelled"
+  },
+  "error_analysis": {
+    "accuracy_by_note_language": {
+      "en": {
+        "n": 4464,
+        "accuracy": 0.943
+      },
+      "none": {
+        "n": 733,
+        "accuracy": 0.835
+      },
+      "ta": {
+        "n": 982,
+        "accuracy": 0.967
+      },
+      "tanglish": {
+        "n": 1170,
+        "accuracy": 0.953
+      }
+    },
+    "accuracy_when_machine_state_matches_typical": 0.962,
+    "accuracy_when_machine_state_is_misleading": 0.905,
+    "baseline_accuracy_when_state_misleading": 0.138,
+    "mean_confidence_correct": 0.965,
+    "mean_confidence_wrong": 0.702,
+    "top_confusions": [
+      {
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "MATERIAL_MISALIGNMENT",
+        "count": 35
+      },
+      {
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "QUALITY_INSPECTION_DELAY",
+        "count": 28
+      },
+      {
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "TOOL_CHANGE",
+        "count": 22
+      },
+      {
+        "true": "MATERIAL_MISALIGNMENT",
+        "predicted": "OPERATOR_LOADING_DELAY",
+        "count": 21
+      },
+      {
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "ROBOT_RECOVERY",
+        "count": 18
+      },
+      {
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "MATERIAL_SHORTAGE",
+        "count": 17
+      }
+    ],
+    "example_errors": [
+      {
+        "event_id": "EVT_003994",
+        "true": "SAFETY_ZONE_INTERRUPTION",
+        "predicted": "MATERIAL_MISALIGNMENT",
+        "confidence": 1.0,
+        "state": "INSPECTION_HOLD",
+        "note": "reset done",
+        "why": [
+          [
+            "workstation_id_WS_01",
+            3.73
+          ],
+          [
+            "material_status_MISALIGNED",
+            2.5
+          ],
+          [
+            "product_Product_A",
+            2.061
+          ],
+          [
+            "robot_mode_COLLABORATIVE",
+            1.85
+          ],
+          [
+            "next_machine_state_RECOVERY",
+            1.363
+          ]
+        ]
+      },
+      {
+        "event_id": "EVT_006864",
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "QUALITY_INSPECTION_DELAY",
+        "confidence": 1.0,
+        "state": "TOOL_CHANGE",
+        "note": "checking dimension variance",
+        "why": [
+          [
+            "product_Product_D",
+            3.114
+          ],
+          [
+            "robot_mode_COLLABORATIVE",
+            1.407
+          ],
+          [
+            "quality_status_MARGINAL",
+            1.164
+          ],
+          [
+            "material_status_PRESENT",
+            0.956
+          ],
+          [
+            "ct_quality",
+            0.783
+          ]
+        ]
+      },
+      {
+        "event_id": "EVT_010095",
+        "true": "ROBOT_RECOVERY",
+        "predicted": "TOOL_CHANGE",
+        "confidence": 0.999,
+        "state": "TOOL_CHANGE",
+        "note": "robot stop aachu reset panninom",
+        "why": [
+          [
+            "machine_state_TOOL_CHANGE",
+            4.347
+          ],
+          [
+            "log_duration",
+            1.925
+          ],
+          [
+            "safety_zone_status_MUTED",
+            1.547
+          ],
+          [
+            "product_Product_A",
+            0.758
+          ],
+          [
+            "next_machine_state_RUNNING",
+            0.685
+          ]
+        ]
+      },
+      {
+        "event_id": "EVT_001942",
+        "true": "TOOL_CHANGE",
+        "predicted": "MATERIAL_MISALIGNMENT",
+        "confidence": 0.999,
+        "state": "IDLE",
+        "note": "material alignment issue on fixture",
+        "why": [
+          [
+            "workstation_id_WS_01",
+            3.73
+          ],
+          [
+            "material_status_MISALIGNED",
+            2.5
+          ],
+          [
+            "product_Product_A",
+            2.061
+          ],
+          [
+            "sensor_status_OK",
+            0.608
+          ],
+          [
+            "ct_align",
+            0.442
+          ]
+        ]
+      },
+      {
+        "event_id": "EVT_006848",
+        "true": "OPERATOR_LOADING_DELAY",
+        "predicted": "MATERIAL_SHORTAGE",
+        "confidence": 0.999,
+        "state": "IDLE",
+        "note": "",
+        "why": [
+          [
+            "machine_state_IDLE",
+            2.974
+          ],
+          [
+            "robot_mode_AUTOMATIC",
+            2.4
+          ],
+          [
+            "material_status_EMPTY",
+            2.138
+          ],
+          [
+            "shift_Shift_1",
+            1.047
+          ],
+          [
+            "safety_zone_status_CLEAR",
+            1.04
+          ]
+        ]
+      }
+    ]
+  },
+  "downtime_attribution": {
+    "prototype": {
+      "error_pct_by_cause": {
+        "OPERATOR_LOADING_DELAY": 6.4,
+        "MATERIAL_MISALIGNMENT": 0.7,
+        "ROBOT_RECOVERY": 0.2,
+        "TOOL_CHANGE": 2.4,
+        "SAFETY_ZONE_INTERRUPTION": 1.4,
+        "MATERIAL_SHORTAGE": 0.8,
+        "QUALITY_INSPECTION_DELAY": 8.1,
+        "SENSOR_INTERRUPTION": 4.6
+      },
+      "top4_mean_error_pct": 2.4,
+      "spearman_rank": 1.0
+    },
+    "baseline": {
+      "error_pct_by_cause": {
+        "OPERATOR_LOADING_DELAY": 21.8,
+        "MATERIAL_MISALIGNMENT": 27.6,
+        "ROBOT_RECOVERY": 21.7,
+        "TOOL_CHANGE": 21.3,
+        "SAFETY_ZONE_INTERRUPTION": 1.0,
+        "MATERIAL_SHORTAGE": 49.2,
+        "QUALITY_INSPECTION_DELAY": 48.2,
+        "SENSOR_INTERRUPTION": 179.7
+      },
+      "top4_mean_error_pct": 23.1,
+      "spearman_rank": 0.357
+    }
+  },
+  "hidden_downtime": {
+    "prototype_correct_share": 0.9226,
+    "baseline_correct_share": 0.5121,
+    "ground_truth_summary": {
+      "hidden_events": 9210,
+      "hidden_hours": 125.37,
+      "hidden_share_of_all_downtime_pct": 87.9,
+      "span_days": 15.9,
+      "annualised_hours_scaled": 2603.1,
+      "annualised_cost_usd": 156189,
+      "annualised_idle_kwh": 651,
+      "annualised_co2_kg": 462,
+      "by_cause": [
+        {
+          "cause": "MATERIAL_MISALIGNMENT",
+          "events": 2407,
+          "seconds": 98931.8,
+          "hours": 27.48,
+          "share_pct": 21.9
+        },
+        {
+          "cause": "MATERIAL_SHORTAGE",
+          "events": 237,
+          "seconds": 37846.0,
+          "hours": 10.51,
+          "share_pct": 8.4
+        },
+        {
+          "cause": "OPERATOR_LOADING_DELAY",
+          "events": 1974,
+          "seconds": 122069.9,
+          "hours": 33.91,
+          "share_pct": 27.0
+        },
+        {
+          "cause": "QUALITY_INSPECTION_DELAY",
+          "events": 462,
+          "seconds": 29868.2,
+          "hours": 8.3,
+          "share_pct": 6.6
+        },
+        {
+          "cause": "ROBOT_RECOVERY",
+          "events": 1351,
+          "seconds": 98455.5,
+          "hours": 27.35,
+          "share_pct": 21.8
+        },
+        {
+          "cause": "SAFETY_ZONE_INTERRUPTION",
+          "events": 554,
+          "seconds": 14202.4,
+          "hours": 3.95,
+          "share_pct": 3.1
+        },
+        {
+          "cause": "SENSOR_INTERRUPTION",
+          "events": 1872,
+          "seconds": 29083.9,
+          "hours": 8.08,
+          "share_pct": 6.4
+        },
+        {
+          "cause": "TOOL_CHANGE",
+          "events": 199,
+          "seconds": 18506.8,
+          "hours": 5.14,
+          "share_pct": 4.1
+        },
+        {
+          "cause": "UNKNOWN",
+          "events": 154,
+          "seconds": 2384.7,
+          "hours": 0.66,
+          "share_pct": 0.5
+        }
+      ]
+    },
+    "deployed_estimate": {
+      "hidden_events": 9210,
+      "hidden_hours": 125.37,
+      "hidden_share_of_all_downtime_pct": 87.9,
+      "span_days": 15.9,
+      "annualised_hours_scaled": 2603.1,
+      "annualised_cost_usd": 156189,
+      "annualised_idle_kwh": 651,
+      "annualised_co2_kg": 462,
+      "by_cause": [
+        {
+          "cause": "MATERIAL_MISALIGNMENT",
+          "events": 2400,
+          "seconds": 99451.8,
+          "hours": 27.63,
+          "share_pct": 22.0
+        },
+        {
+          "cause": "MATERIAL_SHORTAGE",
+          "events": 251,
+          "seconds": 37589.2,
+          "hours": 10.44,
+          "share_pct": 8.3
+        },
+        {
+          "cause": "OPERATOR_LOADING_DELAY",
+          "events": 1894,
+          "seconds": 116427.9,
+          "hours": 32.34,
+          "share_pct": 25.8
+        },
+        {
+          "cause": "QUALITY_INSPECTION_DELAY",
+          "events": 484,
+          "seconds": 31237.8,
+          "hours": 8.68,
+          "share_pct": 6.9
+        },
+        {
+          "cause": "ROBOT_RECOVERY",
+          "events": 1363,
+          "seconds": 98438.2,
+          "hours": 27.34,
+          "share_pct": 21.8
+        },
+        {
+          "cause": "SAFETY_ZONE_INTERRUPTION",
+          "events": 568,
+          "seconds": 14969.9,
+          "hours": 4.16,
+          "share_pct": 3.3
+        },
+        {
+          "cause": "SENSOR_INTERRUPTION",
+          "events": 1869,
+          "seconds": 30012.9,
+          "hours": 8.34,
+          "share_pct": 6.6
+        },
+        {
+          "cause": "TOOL_CHANGE",
+          "events": 222,
+          "seconds": 20115.1,
+          "hours": 5.59,
+          "share_pct": 4.5
+        },
+        {
+          "cause": "UNKNOWN",
+          "events": 159,
+          "seconds": 3106.4,
+          "hours": 0.86,
+          "share_pct": 0.7
+        }
+      ]
+    }
+  },
+  "corrective_actions": [
+    {
+      "cause": "MATERIAL_MISALIGNMENT",
+      "action_id": "CA-01",
+      "action": "Re-machine loading fixture locating pins and add poka-yoke visual guide.",
+      "implemented": true,
+      "n_pre": 1703,
+      "n_post": 697,
+      "rate_pre_per_h": 10.14,
+      "rate_post_per_h": 3.265,
+      "reduction_pct": 67.8,
+      "p_value": 1.1507035632491631e-156,
+      "reduction_ci95_pct": [
+        64.8,
+        70.6
+      ],
+      "hidden_seconds_saved_per_day": 6763.6,
+      "status": "VERIFIED",
+      "stat_status_if_tested": "VERIFIED",
+      "true_effect_pct_assumed": 65.0,
+      "measured_minus_assumed_pp": 2.8,
+      "reduction_if_labels_were_perfect_pct": 68.4
+    },
+    {
+      "cause": "SENSOR_INTERRUPTION",
+      "action_id": "CA-02",
+      "action": "Fit protective lens cover, add weekly lens-cleaning checklist, recalibrate optical sensor.",
+      "implemented": true,
+      "n_pre": 1329,
+      "n_post": 540,
+      "rate_pre_per_h": 7.913,
+      "rate_post_per_h": 2.529,
+      "reduction_pct": 68.0,
+      "p_value": 7.758037634730237e-124,
+      "reduction_ci95_pct": [
+        64.6,
+        71.1
+      ],
+      "hidden_seconds_saved_per_day": 1985.3,
+      "status": "VERIFIED",
+      "stat_status_if_tested": "VERIFIED",
+      "true_effect_pct_assumed": 70.0,
+      "measured_minus_assumed_pp": -2.0,
+      "reduction_if_labels_were_perfect_pct": 68.9
+    },
+    {
+      "cause": "OPERATOR_LOADING_DELAY",
+      "action_id": "CA-03",
+      "action": "Rebalance material delivery cadence and add visual replenishment (kanban) signal on night shift.",
+      "implemented": true,
+      "n_pre": 1099,
+      "n_post": 799,
+      "rate_pre_per_h": 6.544,
+      "rate_post_per_h": 3.742,
+      "reduction_pct": 42.8,
+      "p_value": 5.538039888120856e-34,
+      "reduction_ci95_pct": [
+        37.3,
+        47.9
+      ],
+      "hidden_seconds_saved_per_day": 3851.5,
+      "status": "VERIFIED",
+      "stat_status_if_tested": "VERIFIED",
+      "true_effect_pct_assumed": 45.0,
+      "measured_minus_assumed_pp": -2.2,
+      "reduction_if_labels_were_perfect_pct": 43.2
+    },
+    {
+      "cause": "SAFETY_ZONE_INTERRUPTION",
+      "action_id": "CA-04",
+      "action": "Tune cobot speed-and-separation zones; mark operator standing area on floor.",
+      "implemented": true,
+      "n_pre": 829,
+      "n_post": 637,
+      "rate_pre_per_h": 4.936,
+      "rate_post_per_h": 2.984,
+      "reduction_pct": 39.6,
+      "p_value": 4.6711860860683465e-22,
+      "reduction_ci95_pct": [
+        32.9,
+        45.6
+      ],
+      "hidden_seconds_saved_per_day": 1313.2,
+      "status": "VERIFIED",
+      "stat_status_if_tested": "VERIFIED",
+      "true_effect_pct_assumed": 35.0,
+      "measured_minus_assumed_pp": 4.6,
+      "reduction_if_labels_were_perfect_pct": 39.6
+    },
+    {
+      "cause": "ROBOT_RECOVERY",
+      "action_id": "CA-05",
+      "action": "Re-teach trajectory and recalibrate joint torque limits.",
+      "implemented": true,
+      "n_pre": 625,
+      "n_post": 742,
+      "rate_pre_per_h": 3.721,
+      "rate_post_per_h": 3.475,
+      "reduction_pct": 6.6,
+      "p_value": 0.10903282413449546,
+      "reduction_ci95_pct": [
+        -4.0,
+        16.1
+      ],
+      "hidden_seconds_saved_per_day": -85.5,
+      "status": "NOT_EFFECTIVE",
+      "stat_status_if_tested": "NOT_EFFECTIVE",
+      "true_effect_pct_assumed": 3.0,
+      "measured_minus_assumed_pp": 3.6,
+      "reduction_if_labels_were_perfect_pct": 2.7
+    },
+    {
+      "cause": "TOOL_CHANGE",
+      "action_id": "CA-06",
+      "action": "Standardise quick-change tooling procedure.",
+      "implemented": false,
+      "n_pre": 269,
+      "n_post": 323,
+      "rate_pre_per_h": 1.602,
+      "rate_post_per_h": 1.513,
+      "reduction_pct": 5.5,
+      "p_value": 0.2577125598206657,
+      "reduction_ci95_pct": [
+        -11.5,
+        19.9
+      ],
+      "hidden_seconds_saved_per_day": 265.7,
+      "status": "NO_ACTION",
+      "stat_status_if_tested": "NO_CHANGE",
+      "true_effect_pct_assumed": 0.0,
+      "measured_minus_assumed_pp": 5.5,
+      "reduction_if_labels_were_perfect_pct": -0.0
+    },
+    {
+      "cause": "QUALITY_INSPECTION_DELAY",
+      "action_id": "CA-07",
+      "action": "Add inline vision check to replace manual gauge hold.",
+      "implemented": false,
+      "n_pre": 201,
+      "n_post": 287,
+      "rate_pre_per_h": 1.197,
+      "rate_post_per_h": 1.344,
+      "reduction_pct": -12.3,
+      "p_value": 0.9051245013109441,
+      "reduction_ci95_pct": [
+        -35.2,
+        6.5
+      ],
+      "hidden_seconds_saved_per_day": -206.1,
+      "status": "NO_ACTION",
+      "stat_status_if_tested": "NO_CHANGE",
+      "true_effect_pct_assumed": 0.0,
+      "measured_minus_assumed_pp": -12.3,
+      "reduction_if_labels_were_perfect_pct": -11.6
+    },
+    {
+      "cause": "MATERIAL_SHORTAGE",
+      "action_id": "CA-08",
+      "action": "Add low-stock trigger for AGV replenishment.",
+      "implemented": false,
+      "n_pre": 134,
+      "n_post": 118,
+      "rate_pre_per_h": 0.798,
+      "rate_post_per_h": 0.553,
+      "reduction_pct": 30.7,
+      "p_value": 0.0021879776151384773,
+      "reduction_ci95_pct": [
+        10.6,
+        46.4
+      ],
+      "hidden_seconds_saved_per_day": 845.8,
+      "status": "NO_ACTION",
+      "stat_status_if_tested": "NO_CHANGE",
+      "true_effect_pct_assumed": 0.0,
+      "measured_minus_assumed_pp": 30.7,
+      "reduction_if_labels_were_perfect_pct": 25.8
+    }
+  ],
+  "verification_benchmark": {
+    "effective_actions": [
+      "MATERIAL_MISALIGNMENT",
+      "SENSOR_INTERRUPTION",
+      "OPERATOR_LOADING_DELAY",
+      "SAFETY_ZONE_INTERRUPTION"
+    ],
+    "ineffective_actions": [
+      "ROBOT_RECOVERY"
+    ],
+    "prototype_recall_of_effective": 1.0,
+    "baseline_recall_of_effective": 1.0,
+    "ineffective_not_verified_prototype": 1.0,
+    "ineffective_not_verified_baseline": 1.0,
+    "control_causes_falsely_would_verify": [],
+    "verified_mean_reduction": 0.546,
+    "mean_abs_estimate_error_pp_effective": 2.9,
+    "baseline_mean_abs_estimate_error_pp_effective_and_ineffective": 9.3,
+    "prototype_mean_abs_estimate_error_pp_effective_and_ineffective": 3.0,
+    "baseline_status": {
+      "MATERIAL_MISALIGNMENT": "VERIFIED",
+      "SENSOR_INTERRUPTION": "VERIFIED",
+      "OPERATOR_LOADING_DELAY": "VERIFIED",
+      "SAFETY_ZONE_INTERRUPTION": "VERIFIED",
+      "ROBOT_RECOVERY": "INCONCLUSIVE"
+    },
+    "baseline_reduction_pct": {
+      "MATERIAL_MISALIGNMENT": 61.6,
+      "SENSOR_INTERRUPTION": 57.8,
+      "OPERATOR_LOADING_DELAY": 49.5,
+      "SAFETY_ZONE_INTERRUPTION": 39.5,
+      "ROBOT_RECOVERY": 24.8
+    },
+    "verified_hidden_hours_saved_per_day": 3.865
+  },
+  "patterns": [
+    {
+      "cause": "OPERATOR_LOADING_DELAY",
+      "events": 1898,
+      "downtime_hours": 32.39,
+      "downtime_share_pct": 22.7,
+      "mean_duration_sec": 61.4,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.957,
+      "top_machine_state": "WAITING_FOR_OPERATOR",
+      "context": {
+        "shift": [
+          {
+            "value": "Shift_3",
+            "share": 0.63,
+            "lift": 1.9
+          }
+        ]
+      },
+      "recommended_action": "Rebalance material delivery cadence and add visual replenishment (kanban) signal on night shift.",
+      "action_id": "CA-03",
+      "priority_score": 31.0,
+      "pattern_id": "P-01"
+    },
+    {
+      "cause": "MATERIAL_MISALIGNMENT",
+      "events": 2400,
+      "downtime_hours": 27.63,
+      "downtime_share_pct": 19.4,
+      "mean_duration_sec": 41.4,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.971,
+      "top_machine_state": "WAITING_FOR_OPERATOR",
+      "context": {
+        "workstation_id": [
+          {
+            "value": "WS_01",
+            "share": 0.61,
+            "lift": 2.59
+          }
+        ],
+        "shift": [
+          {
+            "value": "Shift_2",
+            "share": 0.55,
+            "lift": 1.71
+          }
+        ],
+        "product": [
+          {
+            "value": "Product_A",
+            "share": 0.74,
+            "lift": 2.07
+          }
+        ]
+      },
+      "recommended_action": "Re-machine loading fixture locating pins and add poka-yoke visual guide.",
+      "action_id": "CA-01",
+      "priority_score": 26.83,
+      "pattern_id": "P-02"
+    },
+    {
+      "cause": "ROBOT_RECOVERY",
+      "events": 1367,
+      "downtime_hours": 27.38,
+      "downtime_share_pct": 19.2,
+      "mean_duration_sec": 72.1,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.97,
+      "top_machine_state": "RECOVERY",
+      "context": {},
+      "recommended_action": "Re-teach trajectory and recalibrate joint torque limits.",
+      "action_id": "CA-05",
+      "priority_score": 26.55,
+      "pattern_id": "P-03"
+    },
+    {
+      "cause": "TOOL_CHANGE",
+      "events": 592,
+      "downtime_hours": 16.13,
+      "downtime_share_pct": 11.3,
+      "mean_duration_sec": 98.1,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.958,
+      "top_machine_state": "TOOL_CHANGE",
+      "context": {},
+      "recommended_action": "Standardise quick-change tooling procedure.",
+      "action_id": "CA-06",
+      "priority_score": 15.45,
+      "pattern_id": "P-04"
+    },
+    {
+      "cause": "SAFETY_ZONE_INTERRUPTION",
+      "events": 1466,
+      "downtime_hours": 10.59,
+      "downtime_share_pct": 7.4,
+      "mean_duration_sec": 26.0,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.971,
+      "top_machine_state": "SAFETY_STOP",
+      "context": {},
+      "recommended_action": "Tune cobot speed-and-separation zones; mark operator standing area on floor.",
+      "action_id": "CA-04",
+      "priority_score": 10.28,
+      "pattern_id": "P-05"
+    },
+    {
+      "cause": "MATERIAL_SHORTAGE",
+      "events": 252,
+      "downtime_hours": 10.45,
+      "downtime_share_pct": 7.3,
+      "mean_duration_sec": 149.3,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.928,
+      "top_machine_state": "IDLE",
+      "context": {
+        "shift": [
+          {
+            "value": "Shift_1",
+            "share": 0.53,
+            "lift": 1.54
+          }
+        ]
+      },
+      "recommended_action": "Add low-stock trigger for AGV replenishment.",
+      "action_id": "CA-08",
+      "priority_score": 9.7,
+      "pattern_id": "P-06"
+    },
+    {
+      "cause": "QUALITY_INSPECTION_DELAY",
+      "events": 488,
+      "downtime_hours": 8.77,
+      "downtime_share_pct": 6.1,
+      "mean_duration_sec": 64.7,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.938,
+      "top_machine_state": "INSPECTION_HOLD",
+      "context": {
+        "product": [
+          {
+            "value": "Product_D",
+            "share": 0.53,
+            "lift": 2.66
+          },
+          {
+            "value": "Product_C",
+            "share": 0.47,
+            "lift": 2.1
+          }
+        ]
+      },
+      "recommended_action": "Add inline vision check to replace manual gauge hold.",
+      "action_id": "CA-07",
+      "priority_score": 8.23,
+      "pattern_id": "P-07"
+    },
+    {
+      "cause": "SENSOR_INTERRUPTION",
+      "events": 1869,
+      "downtime_hours": 8.34,
+      "downtime_share_pct": 5.8,
+      "mean_duration_sec": 16.1,
+      "days_active": 17,
+      "recurrence_ratio": 1.0,
+      "mean_confidence": 0.977,
+      "top_machine_state": "BLOCKED",
+      "context": {},
+      "recommended_action": "Fit protective lens cover, add weekly lens-cleaning checklist, recalibrate optical sensor.",
+      "action_id": "CA-02",
+      "priority_score": 8.15,
+      "pattern_id": "P-08"
+    }
+  ],
+  "unknown_clusters": [
+    {
+      "cluster": 1,
+      "events": 49,
+      "downtime_hours": 0.28,
+      "top_state": "BLOCKED",
+      "top_workstation": "WS_09",
+      "example_notes": [
+        "seri aayiduchu",
+        "minor pause",
+        "reset done"
+      ]
+    },
+    {
+      "cluster": 2,
+      "events": 49,
+      "downtime_hours": 0.31,
+      "top_state": "WAITING_FOR_OPERATOR",
+      "top_workstation": "WS_02",
+      "example_notes": [
+        "test run",
+        "test run",
+        "restarted"
+      ]
+    },
+    {
+      "cluster": 0,
+      "events": 22,
+      "downtime_hours": 0.17,
+      "top_state": "WAITING_FOR_OPERATOR",
+      "top_workstation": "WS_06",
+      "example_notes": []
+    }
+  ],
+  "cost_benefit": {
+    "assumptions": {
+      "build_hours": 120,
+      "build_rate_usd": 30,
+      "edge_pc_usd": 600,
+      "maintenance_hours_per_month": 6,
+      "corrective_action_hardware_usd": 4000
+    },
+    "verified_hours_saved_per_year": 1275.4,
+    "annual_benefit_usd": 76525,
+    "year1_cost_usd": 10360,
+    "payback_months": 1.6,
+    "annual_idle_kwh_avoided": 319,
+    "annual_co2_kg_avoided": 226
+  },
+  "targets": [
+    {
+      "metric": "Prototype macro-F1 (cause attribution)",
+      "baseline": 0.5044,
+      "target": ">= 0.8",
+      "measured": 0.8985,
+      "pass": true
+    },
+    {
+      "metric": "Macro-F1 gain over baseline",
+      "baseline": 0.0,
+      "target": ">= +0.1",
+      "measured": 0.3941,
+      "pass": true
+    },
+    {
+      "metric": "Hidden downtime attributed to correct cause (share of seconds)",
+      "baseline": 0.5121,
+      "target": ">= 0.8",
+      "measured": 0.9226,
+      "pass": true
+    },
+    {
+      "metric": "Top-4 cause downtime attribution error (%)",
+      "baseline": 23.1,
+      "target": "<= 10.0",
+      "measured": 2.4,
+      "pass": true
+    },
+    {
+      "metric": "Effective corrective actions correctly VERIFIED (recall)",
+      "baseline": 1.0,
+      "target": ">= 0.75",
+      "measured": 1.0,
+      "pass": true
+    },
+    {
+      "metric": "Ineffective action NOT verified",
+      "baseline": 1.0,
+      "target": "= 1.0",
+      "measured": 1.0,
+      "pass": true
+    },
+    {
+      "metric": "Mean measured reduction of verified actions",
+      "baseline": null,
+      "target": ">= 0.3",
+      "measured": 0.546,
+      "pass": true
+    },
+    {
+      "metric": "Worst macro-F1 drop across failure states",
+      "baseline": 0.0856,
+      "target": "<= 0.15",
+      "measured": 0.1757,
+      "pass": false
+    },
+    {
+      "metric": "Unseen cause NOT confidently misattributed",
+      "baseline": 0.0,
+      "target": ">= 0.5",
+      "measured": 0.0181,
+      "pass": false
+    }
+  ]
+}

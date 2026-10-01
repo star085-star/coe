@@ -1,0 +1,121 @@
+{
+  "per_seed": [
+    {
+      "seed": 1,
+      "baseline_macro_f1": 0.5142,
+      "prototype_macro_f1": 0.8823,
+      "hidden_correct_share": 0.9213,
+      "verif_recall": 1.0,
+      "ineffective_not_verified": 1.0,
+      "false_verifications": 0,
+      "est_error_pp_proto": 1.6,
+      "est_error_pp_base": 8.5,
+      "worst_drop": 0.1698,
+      "unseen_abstain": 0.0097
+    },
+    {
+      "seed": 2,
+      "baseline_macro_f1": 0.5102,
+      "prototype_macro_f1": 0.8691,
+      "hidden_correct_share": 0.9081,
+      "verif_recall": 1.0,
+      "ineffective_not_verified": 1.0,
+      "false_verifications": 0,
+      "est_error_pp_proto": 2.3,
+      "est_error_pp_base": 6.7,
+      "worst_drop": 0.1757,
+      "unseen_abstain": 0.0728
+    },
+    {
+      "seed": 3,
+      "baseline_macro_f1": 0.5093,
+      "prototype_macro_f1": 0.8846,
+      "hidden_correct_share": 0.9204,
+      "verif_recall": 1.0,
+      "ineffective_not_verified": 1.0,
+      "false_verifications": 0,
+      "est_error_pp_proto": 1.3,
+      "est_error_pp_base": 5.7,
+      "worst_drop": 0.1481,
+      "unseen_abstain": 0.0318
+    },
+    {
+      "seed": 4,
+      "baseline_macro_f1": 0.5127,
+      "prototype_macro_f1": 0.8851,
+      "hidden_correct_share": 0.922,
+      "verif_recall": 1.0,
+      "ineffective_not_verified": 1.0,
+      "false_verifications": 0,
+      "est_error_pp_proto": 3.2,
+      "est_error_pp_base": 6.9,
+      "worst_drop": 0.16,
+      "unseen_abstain": 0.0053
+    },
+    {
+      "seed": 5,
+      "baseline_macro_f1": 0.502,
+      "prototype_macro_f1": 0.8915,
+      "hidden_correct_share": 0.923,
+      "verif_recall": 1.0,
+      "ineffective_not_verified": 1.0,
+      "false_verifications": 0,
+      "est_error_pp_proto": 2.1,
+      "est_error_pp_base": 9.4,
+      "worst_drop": 0.1714,
+      "unseen_abstain": 0.0053
+    }
+  ],
+  "summary": {
+    "baseline_macro_f1": {
+      "mean": 0.51,
+      "min": 0.502,
+      "max": 0.514
+    },
+    "prototype_macro_f1": {
+      "mean": 0.883,
+      "min": 0.869,
+      "max": 0.891
+    },
+    "hidden_correct_share": {
+      "mean": 0.919,
+      "min": 0.908,
+      "max": 0.923
+    },
+    "verif_recall": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "ineffective_not_verified": {
+      "mean": 1.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "false_verifications": {
+      "mean": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "est_error_pp_proto": {
+      "mean": 2.1,
+      "min": 1.3,
+      "max": 3.2
+    },
+    "est_error_pp_base": {
+      "mean": 7.44,
+      "min": 5.7,
+      "max": 9.4
+    },
+    "worst_drop": {
+      "mean": 0.165,
+      "min": 0.148,
+      "max": 0.176
+    },
+    "unseen_abstain": {
+      "mean": 0.025,
+      "min": 0.005,
+      "max": 0.073
+    }
+  }
+}

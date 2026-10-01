@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Micro-Stoppage Pattern Miner</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#14181f;--card:#fff;--line:#c5ccd6;--acc:#0b5cad;--ok:#0a6b2f;--bad:#a4161a;--warn:#7a4b00;--fs:16px}
+:root.hc{--bg:#000;--fg:#fff;--card:#000;--line:#fff;--acc:#6cf;--ok:#7f7;--bad:#f88;--warn:#fd5}
+html{font-size:var(--fs)}body{margin:0;font-family:system-ui,"Noto Sans Tamil","Latha",sans-serif;background:var(--bg);color:var(--fg);line-height:1.5}
+a.skip{position:absolute;left:-999px}a.skip:focus{left:8px;top:8px;background:var(--card);padding:8px;z-index:9}
+header{padding:12px 20px;border-bottom:2px solid var(--line);background:var(--card);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:1.25rem;margin:0}h2{font-size:1.1rem}main{max-width:1100px;margin:auto;padding:16px}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button,select,input,textarea{font:inherit;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:6px;padding:6px 10px;min-height:44px}
+button{cursor:pointer}button[aria-selected=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
+:root.hc button[aria-selected=true]{color:#000}
+:focus-visible{outline:3px solid #f90;outline-offset:2px}
+nav[role=tablist]{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}.kpi b{display:block;font-size:1.6rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}caption{text-align:left;font-weight:600;padding:4px 0}
+.table-wrap{overflow-x:auto}
+.bar{display:flex;align-items:center;gap:8px;margin:4px 0}.bar span.t{flex:0 0 220px}.bar i{display:block;height:16px;background:var(--acc);border-radius:3px}
+.s-VERIFIED,.pass{color:var(--ok);font-weight:700}.s-NOT_EFFECTIVE,.fail{color:var(--bad);font-weight:700}.s-INCONCLUSIVE{color:var(--warn);font-weight:700}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}label{display:flex;flex-direction:column;font-weight:600;font-size:.9rem}
+[hidden]{display:none}@media (prefers-reduced-motion:no-preference){.bar i{transition:width .4s}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i="skip">Skip to content</a>
+<header>
+  <h1 id="title" data-i="title">Micro-Stoppage Pattern Miner</h1>
+  <div class="tools" role="group" aria-label="Display options">
+    <label>Language / மொழி<select id="lang"><option value="en">English</option><option value="ta">தமிழ்</option></select></label>
+    <button id="fsplus" aria-label="Increase text size">A+</button><button id="fsminus" aria-label="Decrease text size">A−</button>
+    <button id="hc" aria-pressed="false" data-i="contrast">High contrast</button>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<nav role="tablist" id="tabs"></nav>
+<div id="status" role="status" aria-live="polite" class="card" hidden></div>
+<section id="v-overview"></section><section id="v-patterns" hidden></section><section id="v-actions" hidden></section><section id="v-triage" hidden></section><section id="v-eval" hidden></section>
+</main>
+<script>
+const T={en:{skip:"Skip to content",title:"Micro-Stoppage Pattern Miner",contrast:"High contrast",overview:"Overview",patterns:"Patterns",actions:"Corrective actions",triage:"Live triage",eval:"Evaluation",
+ hidden:"Hidden downtime (h)",share:"Share of all downtime",annual:"Annualised loss (USD, assumed rate)",verified:"Verified actions",events:"Events",cause:"Cause",hours:"Downtime (h)",conf:"Confidence",
+ action:"Recommended action",ctx:"Where / when",status:"Status",pre:"Rate before (/h)",post:"Rate after (/h)",red:"Reduction",note:"Operator note",dur:"Duration (s)",state:"Machine state",product:"Product",shift:"Shift",ws:"Workstation",
+ classify:"Classify stoppage",review:"Needs human review",evidence:"Evidence",lang:"Note language",VERIFIED:"Verified",NOT_EFFECTIVE:"Not effective",INCONCLUSIVE:"Inconclusive",NO_ACTION:"No action yet",
+ signoff:"Confirm",reject:"Reject",metric:"Metric",baseline:"Baseline",target:"Target",measured:"Measured",result:"Result",PASS:"Pass",FAIL:"Fail",loading:"Loading…",suggested:"Suggested action",
+ disclaimer:"Patterns describe machines, fixtures and processes — not individual operators. Data shown is synthetic."},
+ ta:{skip:"உள்ளடக்கத்திற்குச் செல்",title:"நுண்-நிறுத்த முறை கண்டறிதல்",contrast:"அதிக மாறுபாடு",overview:"மேலோட்டம்",patterns:"முறைகள்",actions:"திருத்த நடவடிக்கைகள்",triage:"நேரடி பகுப்பாய்வு",eval:"மதிப்பீடு",
+ hidden:"மறைந்த செயலிழப்பு நேரம் (மணி)",share:"மொத்த செயலிழப்பில் பங்கு",annual:"ஆண்டு இழப்பு (USD, கருதிய கட்டணம்)",verified:"சரிபார்க்கப்பட்ட நடவடிக்கைகள்",events:"நிகழ்வுகள்",cause:"காரணம்",hours:"செயலிழப்பு நேரம் (மணி)",conf:"நம்பிக்கை அளவு",
+ action:"பரிந்துரைக்கப்பட்ட நடவடிக்கை",ctx:"எங்கே / எப்போது",status:"நிலை",pre:"முன் விகிதம் (/மணி)",post:"பின் விகிதம் (/மணி)",red:"குறைவு",note:"இயக்குநர் குறிப்பு",dur:"கால அளவு (வி)",state:"இயந்திர நிலை",product:"தயாரிப்பு",shift:"ஷிப்ட்",ws:"பணிநிலையம்",
+ classify:"வகைப்படுத்து",review:"மனித மறுஆய்வு தேவை",evidence:"ஆதாரம்",lang:"குறிப்பு மொழி",VERIFIED:"சரிபார்க்கப்பட்டது",NOT_EFFECTIVE:"பயனளிக்கவில்லை",INCONCLUSIVE:"முடிவற்றது",NO_ACTION:"நடவடிக்கை இல்லை",
+ signoff:"உறுதிப்படுத்து",reject:"நிராகரி",metric:"அளவீடு",baseline:"அடிப்படை மாதிரி",target:"இலக்கு",measured:"அளவிடப்பட்டது",result:"முடிவு",PASS:"தேர்ச்சி",FAIL:"தோல்வி",loading:"ஏற்றுகிறது…",suggested:"பரிந்துரை",
+ disclaimer:"முறைகள் இயந்திரங்கள், பொருத்திகள், செயல்முறைகளைப் பற்றியவை — தனிப்பட்ட இயக்குநர்களைப் பற்றியவை அல்ல. காட்டப்படும் தரவு செயற்கையானது."}};
+const CAUSE={MATERIAL_MISALIGNMENT:["Material misalignment","பொருள் சீரமைப்பு பிழை"],SENSOR_INTERRUPTION:["Sensor interruption","சென்சார் தடங்கல்"],OPERATOR_LOADING_DELAY:["Operator loading delay","இயக்குநர் ஏற்றுதல் தாமதம்"],
+ SAFETY_ZONE_INTERRUPTION:["Safety-zone interruption","பாதுகாப்பு மண்டல இடையூறு"],ROBOT_RECOVERY:["Robot recovery","ரோபோ மீட்பு"],TOOL_CHANGE:["Tool change","கருவி மாற்றம்"],
+ QUALITY_INSPECTION_DELAY:["Quality inspection delay","தர ஆய்வு தாமதம்"],MATERIAL_SHORTAGE:["Material shortage","பொருள் பற்றாக்குறை"],UNKNOWN:["Unknown / review","அறியப்படாதது"]};
+let L="en",view="overview",cache={};
+const t=k=>T[L][k]||k, cn=c=>(CAUSE[c]||[c,c])[L==="en"?0:1], esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const api=async(p,o)=>{const r=await fetch(p,o);if(!r.ok)throw new Error(p+" "+r.status);return r.json()};
+const say=m=>{const s=document.getElementById("status");s.textContent=m;s.hidden=!m};
+const ctxTxt=c=>Object.entries(c||{}).map(([k,v])=>v.map(x=>`${esc(x.value)} (${Math.round(x.share*100)}%)`).join(", ")).join(" · ")||"—";
+const bars=(rows,key,lab)=>{const m=Math.max(...rows.map(r=>r[key]));return rows.map(r=>`<div class="bar"><span class="t">${esc(lab(r))}</span><i style="width:${Math.max(2,300*r[key]/m)}px" aria-hidden="true"></i><span>${r[key]}</span></div>`).join("")};
+const stat=s=>`<span class="s-${s}">${s==="VERIFIED"?"✔ ":s==="NOT_EFFECTIVE"?"✖ ":s==="INCONCLUSIVE"?"? ":""}${esc(t(s))}</span>`;
+async function get(k,p){return cache[k]??=await api(p)}
+const R={
+ async overview(el){const k=await get("kpis","/kpis"),c=await get("causes","/causes");
+  el.innerHTML=`<div class="kpis">${[["hidden",k.hidden_downtime_hours],["share",k.hidden_share_pct+"%"],["annual","$"+k.annualised_cost_usd.toLocaleString()],["verified",k.verified_actions+" / 5"]].map(([a,b])=>`<div class="card kpi"><b>${b}</b>${esc(t(a))}</div>`).join("")}</div>
+  <div class="card"><h2>${esc(t("hidden"))} — ${esc(t("cause"))}</h2>${bars(c,"hours",r=>cn(r.cause))}</div><p>${esc(t("disclaimer"))}</p>`},
+ async patterns(el){const p=await get("patterns","/patterns");
+  el.innerHTML=`<div class="table-wrap"><table><caption>${esc(t("patterns"))}</caption><thead><tr>${["#",t("cause"),t("events"),t("hours"),t("conf"),t("ctx"),t("action")].map(h=>`<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${p.map(x=>`<tr><th scope="row">${x.pattern_id}</th><td>${esc(cn(x.cause))}</td><td>${x.events}</td><td>${x.downtime_hours}</td><td>${x.mean_confidence}</td><td>${ctxTxt(x.context)}</td><td>${esc(x.recommended_action)}</td></tr>`).join("")}</tbody></table></div>`},
+ async actions(el){const a=(await api("/corrective-actions")).filter(x=>x.implemented);
+  el.innerHTML=`<div class="table-wrap"><table><caption>${esc(t("actions"))}</caption><thead><tr>${[t("cause"),t("action"),t("pre"),t("post"),t("red"),t("status"),""].map(h=>`<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${a.map(x=>`<tr><th scope="row">${esc(cn(x.cause))}</th><td>${esc(x.action)}</td><td>${x.rate_pre_per_h}</td><td>${x.rate_post_per_h}</td><td>${x.reduction_pct}% <small>[${x.reduction_ci95_pct.join(" – ")}]</small></td><td>${stat(x.status)}${x.human_signoff?`<br><small>${esc(x.human_signoff.decision)} – ${esc(x.human_signoff.confirmed_by)}</small>`:""}</td><td><button data-sign="${x.action_id}|CONFIRM">${esc(t("signoff"))}</button> <button data-sign="${x.action_id}|REJECT">${esc(t("reject"))}</button></td></tr>`).join("")}</tbody></table></div>`;
+  el.querySelectorAll("[data-sign]").forEach(b=>b.onclick=async()=>{const[id,d]=b.dataset.sign.split("|");await api("/verify-action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action_id:id,decision:d,confirmed_by:"supervisor"})});say(id+" "+d);show("actions")})},
+ async triage(el){const o=(id,l,v)=>`<label>${esc(t(l))}<select id="${id}">${v.map(x=>`<option>${x}</option>`).join("")}</select></label>`;
+  el.innerHTML=`<form id="tf" class="card form" onsubmit="return false">${o("machine_state","state",["WAITING_FOR_OPERATOR","ERROR","RECOVERY","SAFETY_STOP","TOOL_CHANGE","INSPECTION_HOLD","BLOCKED","IDLE","RUNNING"])}${o("product","product",["Product_A","Product_B","Product_C","Product_D"])}${o("shift","shift",["Shift_1","Shift_2","Shift_3"])}${o("workstation_id","ws",Array.from({length:10},(_, i)=>"WS_"+String(i+1).padStart(2,"0")))}
+  <label>${esc(t("dur"))}<input id="dur" type="number" min="0" value="30"></label><label style="grid-column:1/-1">${esc(t("note"))}<textarea id="note" rows="2" placeholder="sensor block aachu / சென்சார் தூசி அடைப்பு"></textarea></label><button id="go" type="submit">${esc(t("classify"))}</button></form><div id="out" class="card" aria-live="polite"></div>`;
+  document.getElementById("go").onclick=async()=>{const g=i=>document.getElementById(i).value;const r=await api("/classify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({machine_state:g("machine_state"),product:g("product"),shift:g("shift"),workstation_id:g("workstation_id"),stoppage_duration_seconds:+g("dur"),operator_note:g("note")})});
+   document.getElementById("out").innerHTML=`<h2>${esc(cn(r.cause))} <small>(${esc(t("conf"))} ${r.confidence})</small></h2>${r.needs_human_review?`<p class="s-INCONCLUSIVE">⚠ ${esc(t("review"))}</p>`:""}<p>${esc(t("lang"))}: ${esc(r.note_language)}</p><p><b>${esc(t("suggested"))}:</b> ${esc(r.suggested_action)}</p><p><b>${esc(t("evidence"))}:</b> ${r.evidence.map(e=>esc(e.feature)).join(", ")}</p><ul>${r.top3.map(x=>`<li>${esc(cn(x.cause))}: ${x.p}</li>`).join("")}</ul>`}},
+ async eval(el){const e=await api("/evaluation");
+  el.innerHTML=`<div class="table-wrap"><table><caption>${esc(t("eval"))}</caption><thead><tr>${[t("metric"),t("baseline"),t("target"),t("measured"),t("result")].map(h=>`<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${e.targets.map(x=>`<tr><th scope="row">${esc(x.metric)}</th><td>${x.baseline??"—"}</td><td>${esc(x.target)}</td><td>${x.measured}</td><td class="${x.pass?"pass":"fail"}">${x.pass?"✔ ":"✖ "}${esc(t(x.pass?"PASS":"FAIL"))}</td></tr>`).join("")}</tbody></table></div>`}};
+const TABS=["overview","patterns","actions","triage","eval"];
+async function show(v){view=v;TABS.forEach(x=>{document.getElementById("v-"+x).hidden=x!==v;});document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.v===v));
+ const el=document.getElementById("v-"+v);say(t("loading"));try{await R[v](el);say("")}catch(e){say("Error: "+e.message)}}
+function build(){document.documentElement.lang=L==="ta"?"ta":"en";document.querySelectorAll("[data-i]").forEach(n=>n.textContent=t(n.dataset.i));
+ const tabs=document.getElementById("tabs");tabs.innerHTML=TABS.map(x=>`<button role="tab" data-v="${x}" aria-selected="${x===view}">${esc(t(x))}</button>`).join("");tabs.querySelectorAll("button").forEach(b=>b.onclick=()=>show(b.dataset.v));
+ tabs.onkeydown=e=>{const i=TABS.indexOf(view);if(e.key==="ArrowRight")show(TABS[(i+1)%5]);if(e.key==="ArrowLeft")show(TABS[(i+4)%5])};show(view)}
+document.getElementById("lang").onchange=e=>{L=e.target.value;build()};
+let fs=16;const setfs=d=>{fs=Math.min(26,Math.max(12,fs+d));document.documentElement.style.setProperty("--fs",fs+"px")};
+document.getElementById("fsplus").onclick=()=>setfs(2);document.getElementById("fsminus").onclick=()=>setfs(-2);
+document.getElementById("hc").onclick=e=>{const on=document.documentElement.classList.toggle("hc");e.target.setAttribute("aria-pressed",on)};
+build();
+</script>
+</body></html>
